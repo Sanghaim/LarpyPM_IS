@@ -1,0 +1,1 @@
+<p class="text-center">Vytvořil Vladimír Straka s pomocí frameworku Laravel</p>

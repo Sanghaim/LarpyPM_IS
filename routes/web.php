@@ -22,11 +22,17 @@ Auth::routes();
 
 // Basic pages routes
 Route::get('contact', 'PagesController@getContact');
+Route::post('contact', 'PagesController@postContact')->name('contact');
 Route::get('about', 'PagesController@getAbout');
 Route::get('/', 'PagesController@getIndex');
 
 // Eloquent routes
 Route::resource('posts', 'PostController');
+Route::resource('categories', 'CategoryController', ['except' => ['create']]);
+Route::resource('tags', 'TagController', ['except' => ['create']]);
+
+// Comment
+Route::post('comments/{post_id}', ['uses' => 'CommentsController@store', 'as' => 'comments.store']);
 
 // Simple routes
 Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[\w\d-\_]+');

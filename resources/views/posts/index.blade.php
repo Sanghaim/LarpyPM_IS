@@ -32,7 +32,7 @@
                         <tr>
                             <th> {{ $post->id }}</th>
                             <td> {{ $post->title }}</td>
-                            <td> {{ str_limit($post->body, $limit = 50, $end = '...') }}</td>
+                            <td> {{ str_limit(strip_tags($post->body), $limit = 50, $end = '...') }}</td>
                             <td> {{ date('j. n. Y', strtotime($post->created_at)) }}</td>
                             {{--$post->created_at->diffForHumans()--}}
                             <td>

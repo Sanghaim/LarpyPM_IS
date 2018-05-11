@@ -8,15 +8,50 @@
         <div class="col-md-8">
             <h1>{{ $post->title }}</h1>
 
-            <p class="lead"> {{ $post->body }} </p>
+            <p class="lead"> {!! $post->body !!} </p>
+            <hr>
+            <div class="tags">
+                @foreach($post->tags as $tag)
+                    <span class="badge badge-secondary">{{ $tag->name }}</span>
+                @endforeach
+            </div>
+
+            <div class="backend-comments mt-4">
+                <h3>Komentáře
+                    <small>{{ $post->comments()->count() }}</small>
+                </h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Jméno</th>
+                        <th>Email</th>
+                        <th>Komentář</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($post->comments as $comment)
+                        <tr>
+                            <td>{{ $comment->name }}</td>
+                            <td>{{ $comment->email }}</td>
+                            <td>{{ $comment->body }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="col-md-4">
             <div class="card card-body bg-light">
                 <dl class="row">
                     <dt class="col-sm-3">URL:</dt>
-                                                    {{-- Jsou dva způsoby, jak generovalt URL, buď pomocí route nebo url a tu ručně nastavíme --}}
-                    <dd class="col-sm-10"><a href="{{ route('blog.single', $post->slug) }}">{{ url('blog/' . $post->slug) }}</a></dd>
+                    {{-- Jsou dva způsoby, jak generovalt URL, buď pomocí route nebo url a tu ručně nastavíme --}}
+                    <dd class="col-sm-10"><a
+                                href="{{ route('blog.single', $post->slug) }}">{{ url('blog/' . $post->slug) }}</a></dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-md-5">Posted At:</dt>
+                    <dd class="col-md-6">{{ $post->category->name }}</dd>
                 </dl>
                 <dl class="row">
                     <dt class="col-sm-5">Created At:</dt>

@@ -22,7 +22,7 @@
             @foreach($posts as $post)
                 <div class="post">
                     <h3>{{ $post->title }}</h3>
-                    <p> {{ str_limit($post->body, $limit = 300, $end = '...') }}</p>
+                    <p> {{ str_limit(strip_tags($post->body), $limit = 300, $end = '...') }}</p>
                     <a href="{{ url('blog/' . $post->slug) }}" class="btn btn-link">Číst dále</a>
                 </div>
 
